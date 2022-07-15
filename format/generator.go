@@ -213,7 +213,11 @@ func (g *generator) Render(tpl string) (string, error) {
 			if err != nil {
 				panic(err)
 			}
-			return strings.TrimSuffix(string(content), "\n")
+			rendered_content, err := g.Render(string(content[:]))
+			if err != nil {
+				panic(err)
+			}
+			return strings.TrimSuffix(string(rendered_content), "\n")
 		},
 	})
 
